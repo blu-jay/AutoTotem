@@ -1,16 +1,16 @@
-package xyz.blujay.autototemofundying.commands;
+package xyz.blujay.autototem.commands;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import xyz.blujay.autototemofundying.AutoTotemOfUndying;
+import xyz.blujay.autototem.AutoTotem;
 
-public class AutoTotemOfUndyingCommand implements CommandExecutor {
+public class AutoTotemCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        var senderAudience = AutoTotemOfUndying.getPlugin().adventure().sender(sender);
+        var senderAudience = AutoTotem.getPlugin().adventure().sender(sender);
         senderAudience.sendMessage(MiniMessage.get().parse("<gradient:#00BFFB:#FD00C5>---------------------</gradient>"));
         senderAudience.sendMessage(MiniMessage.get().parse("<gradient:#00BFFB:#FD00C5>⋙ Auto Totem Of Undying</gradient>"));
         senderAudience.sendMessage(MiniMessage.get().parse("<gradient:#00BFFB:#FD00C5>⋙ Created by blujay</gradient>"));

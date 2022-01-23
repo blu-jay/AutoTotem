@@ -1,12 +1,15 @@
-name: AutoTotemOfUndying
+name: AutoTotem
 version: '${project.version}'
-main: xyz.blujay.autototemofundying.AutoTotemOfUndying
+main: xyz.blujay.autototem.AutoTotem
 api-version: 1.18
-prefix: AutoTotemOfUndying
+prefix: AutoTotem
 authors: [ blujay ]
 description: Automatically use a totem of undying from your inventory!
 website: blujay.xyz
 commands:
-  AutoTotemOfUndying:
+  AutoTotem:
     description: Displays the credits for the plugin.
     usage: /<command>
+permissions:
+  autototem.*:
+    description: Have access to all permissions of AutoTotem
