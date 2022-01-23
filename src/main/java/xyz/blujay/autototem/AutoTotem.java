@@ -1,10 +1,14 @@
 package xyz.blujay.autototem;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import xyz.blujay.autototem.commands.AutoTotemCommand;
 import xyz.blujay.autototem.events.PlayerKilledEvent;
+import xyz.blujay.autototem.utilities.Metrics;
+
+import java.util.concurrent.Callable;
 
 public final class AutoTotem extends JavaPlugin {
 
@@ -26,6 +30,10 @@ public final class AutoTotem extends JavaPlugin {
         plugin = this;
 
         this.adventure = BukkitAudiences.create(this);
+
+        int pluginId = 14038;
+        Metrics metrics = new Metrics(this, pluginId);
+
 
         getCommand("AutoTotem").setExecutor(new AutoTotemCommand());
         getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);

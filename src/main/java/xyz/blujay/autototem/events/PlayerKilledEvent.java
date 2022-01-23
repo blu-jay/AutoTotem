@@ -16,12 +16,10 @@ public class PlayerKilledEvent implements Listener {
             var logger = AutoTotem.getPlugin().getLogger();
 
             if(e.isCancelled()){
-                logger.info("UR GONNA DIE SON!");
                 var inv = p.getInventory();
-                if(inv.containsAtLeast(new ItemStack(Material.TOTEM_OF_UNDYING), 1)){
+                if(inv.containsAtLeast(new ItemStack(Material.TOTEM_OF_UNDYING), 1) && p.hasPermission("autototem.use")){
                     inv.removeItem(new ItemStack(Material.TOTEM_OF_UNDYING));
                     e.setCancelled(false);
-                    logger.info("HAS TOTEM");
                 }
             }
         }

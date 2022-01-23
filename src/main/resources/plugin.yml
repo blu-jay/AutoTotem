@@ -10,6 +10,14 @@ commands:
   AutoTotem:
     description: Displays the credits for the plugin.
     usage: /<command>
+    permission: autototem.credits
 permissions:
   autototem.*:
     description: Have access to all permissions of AutoTotem
+    default: op
+  autototem.use:
+    description: Totems will be automatically used
+    default: true
+  autototem.credits:
+    description: Permission to use /AutoTotem and view the plugin credits
+    default: true
