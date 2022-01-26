@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 public final class AutoTotem extends JavaPlugin {
 
     private static AutoTotem plugin;
+    private static AutoTotemAPI api;
 
     private BukkitAudiences adventure;
 
@@ -28,6 +29,7 @@ public final class AutoTotem extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         plugin = this;
+        api = new AutoTotemAPI();
 
         this.adventure = BukkitAudiences.create(this);
 
@@ -51,5 +53,9 @@ public final class AutoTotem extends JavaPlugin {
 
     public static AutoTotem getPlugin() {
         return plugin;
+    }
+
+    public AutoTotemAPI getAPI(){
+        return api;
     }
 }
