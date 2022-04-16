@@ -1,0 +1,11 @@
+# AutoTotem: by blujay
+
+# Found a bug? Report it on the github! https://github.com/blu-jay/AutoTotem
+# Please consider reviewing the plugin on spigot :)
+
+#config version, DO NOT CHANGE THIS!
+version: 0
+
+# Cool down between auto totem uses. (In Seconds)
+# this can be overwritten by giving players the autototem.bypass permission
+cooldown: 0

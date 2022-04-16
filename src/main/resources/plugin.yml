@@ -21,3 +21,6 @@ permissions:
   autototem.credits:
     description: Permission to use /AutoTotem and view the plugin credits
     default: true
+  autototem.bypass:
+    description: Permission to bypass the cooldown set in config.yml
+    default: false
