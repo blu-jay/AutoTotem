@@ -50,4 +50,4 @@ Drop it into a package called libs
 
 # API Methods
 #### canUseTotem(Player player)
-returns **boolean**: true if the player has a totem in their inventory and AutoTotem could activate.
+returns **boolean**: true if AutoTotem could activate for the given player.
