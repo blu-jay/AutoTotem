@@ -51,3 +51,9 @@ Drop it into a package called libs
 # API Methods
 #### canUseTotem(Player player)
 returns **boolean**: true if AutoTotem could activate for the given player.
+
+#### getCoolDown(Player player)
+returns **Instant**: when the player's cool down expires, and they can use a totem again.
+
+#### setCoolDown(Player player, int coolDown))
+function: Set a player's totem cool down X seconds into the future.
