@@ -1,5 +1,6 @@
 package xyz.blujay.autototem;
 
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.blujay.autototem.commands.AutoTotemCommand;
 import xyz.blujay.autototem.events.PlayerKilledEvent;
@@ -21,10 +22,16 @@ public final class AutoTotem extends JavaPlugin {
         api = new AutoTotemAPI(getConfig().getInt("cooldown"), getConfig().getBoolean("includeVanillaTotemsInCooldown"));
 
         int pluginId = 14038;
-        Metrics metrics = new Metrics(this, pluginId);
+        new Metrics(this, pluginId);
 
+        PluginCommand plugincommand = getCommand("AutoTotem");
+        if (plugincommand != null) {
+            plugincommand.setExecutor(new AutoTotemCommand());
+        } else {
+            getLogger().warning("plugincommand is null meaning we cannot set the \"AutoTotem\" command disabling plugin...");
+            getPluginLoader().disablePlugin(this);
+        }
 
-        getCommand("AutoTotem").setExecutor(new AutoTotemCommand());
         getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);
         this.getLogger().info("AutoTotem has started!");
     }

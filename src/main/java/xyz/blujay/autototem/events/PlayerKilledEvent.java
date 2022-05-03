@@ -9,9 +9,6 @@ import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 import xyz.blujay.autototem.AutoTotem;
-import xyz.blujay.autototem.AutoTotemAPI;
-
-import static org.bukkit.EntityEffect.TOTEM_RESURRECT;
 
 public class PlayerKilledEvent implements Listener {
 
@@ -37,9 +34,7 @@ public class PlayerKilledEvent implements Listener {
 
                     //Next tick put item back in off hand. (Do this because minecraft deletes any item that is in off-hand even if it isn't a totem)
                     BukkitScheduler scheduler = Bukkit.getScheduler();
-                    scheduler.runTaskLater(plugin, () -> {
-                        inv.setItemInOffHand(handItem);
-                    }, 1);
+                    scheduler.runTaskLater(plugin, () -> inv.setItemInOffHand(handItem), 1);
                 }
             }
             else{
