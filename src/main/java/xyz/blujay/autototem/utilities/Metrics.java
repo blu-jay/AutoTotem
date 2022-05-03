@@ -1,18 +1,21 @@
 package xyz.blujay.autototem.utilities;
 
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import javax.net.ssl.HttpsURLConnection;
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -23,6 +26,12 @@ import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.zip.GZIPOutputStream;
+import javax.net.ssl.HttpsURLConnection;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Metrics {
 
@@ -34,7 +43,8 @@ public class Metrics {
      * Creates a new Metrics instance.
      *
      * @param plugin Your plugin instance.
-     * @param serviceId The id of the service. It can be found at <a href="https://bstats.org/what-is-my-plugin-id">What is my plugin id?</a>
+     * @param serviceId The id of the service. It can be found at <a
+     *     href="https://bstats.org/what-is-my-plugin-id">What is my plugin id?</a>
      */
     public Metrics(JavaPlugin plugin, int serviceId) {
         this.plugin = plugin;
@@ -52,12 +62,11 @@ public class Metrics {
             config
                     .options()
                     .header(
-                            """
-                                    bStats (https://bStats.org) collects some basic information for plugin authors, like how
-                                    many people use their plugin and their total player count. It's recommended to keep bStats
-                                    enabled, but if you're not comfortable with this, you can turn this setting off. There is no
-                                    performance penalty associated with having metrics enabled, and data sent to bStats is fully
-                                    anonymous.""")
+                            "bStats (https://bStats.org) collects some basic information for plugin authors, like how\n"
+                                    + "many people use their plugin and their total player count. It's recommended to keep bStats\n"
+                                    + "enabled, but if you're not comfortable with this, you can turn this setting off. There is no\n"
+                                    + "performance penalty associated with having metrics enabled, and data sent to bStats is fully\n"
+                                    + "anonymous.")
                     .copyDefaults(true);
             try {
                 config.save(configFile);
@@ -121,7 +130,7 @@ public class Metrics {
             return onlinePlayersMethod.getReturnType().equals(Collection.class)
                     ? ((Collection<?>) onlinePlayersMethod.invoke(Bukkit.getServer())).size()
                     : ((Player[]) onlinePlayersMethod.invoke(Bukkit.getServer())).length;
-        } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+        } catch (Exception e) {
             // Just use the new method if the reflection failed
             return Bukkit.getOnlinePlayers().size();
         }
@@ -302,7 +311,7 @@ public class Metrics {
             }
             StringBuilder builder = new StringBuilder();
             try (BufferedReader bufferedReader =
-                         new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                         new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     builder.append(line);
@@ -321,9 +330,9 @@ public class Metrics {
                 // Maven's Relocate is clever and changes strings, too. So we have to use this little
                 // "trick" ... :D
                 final String defaultPackage =
-                        new String(new byte[] {'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's'}, StandardCharsets.UTF_8);
+                        new String(new byte[] {'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's'});
                 final String examplePackage =
-                        new String(new byte[] {'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'}, StandardCharsets.UTF_8);
+                        new String(new byte[] {'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
                 // We want to make sure no one just copy & pastes the example and uses the wrong package
                 // names
                 if (MetricsBase.class.getPackage().getName().startsWith(defaultPackage)
@@ -722,31 +731,35 @@ public class Metrics {
         /**
          * Appends an integer array to the JSON.
          *
-         * @param key    The key of the field.
+         * @param key The key of the field.
          * @param values The integer array.
+         * @return A reference to this object.
          */
-        public void appendField(String key, int[] values) {
+        public JsonObjectBuilder appendField(String key, int[] values) {
             if (values == null) {
                 throw new IllegalArgumentException("JSON values must not be null");
             }
             String escapedValues =
                     Arrays.stream(values).mapToObj(String::valueOf).collect(Collectors.joining(","));
             appendFieldUnescaped(key, "[" + escapedValues + "]");
+            return this;
         }
 
         /**
          * Appends an object array to the JSON.
          *
-         * @param key    The key of the field.
+         * @param key The key of the field.
          * @param values The integer array.
+         * @return A reference to this object.
          */
-        public void appendField(String key, JsonObject[] values) {
+        public JsonObjectBuilder appendField(String key, JsonObject[] values) {
             if (values == null) {
                 throw new IllegalArgumentException("JSON values must not be null");
             }
             String escapedValues =
                     Arrays.stream(values).map(JsonObject::toString).collect(Collectors.joining(","));
             appendFieldUnescaped(key, "[" + escapedValues + "]");
+            return this;
         }
 
         /**
@@ -784,7 +797,7 @@ public class Metrics {
         }
 
         /**
-         * Escapes the given string like stated in <a href="https://www.ietf.org/rfc/rfc4627.txt">https://www.ietf.org/rfc/rfc4627.txt</a>.
+         * Escapes the given string like stated in https://www.ietf.org/rfc/rfc4627.txt.
          *
          * <p>This method escapes only the necessary characters '"', '\'. and '\u0000' - '\u001F'.
          * Compact escapes are not used (e.g., '\n' is escaped as "\u000a" and not as "\n").
@@ -818,7 +831,13 @@ public class Metrics {
          * allow a raw string inputs for methods like {@link JsonObjectBuilder#appendField(String,
          * JsonObject)}.
          */
-        public record JsonObject(String value) {
+        public static class JsonObject {
+
+            private final String value;
+
+            private JsonObject(String value) {
+                this.value = value;
+            }
 
             @Override
             public String toString() {
