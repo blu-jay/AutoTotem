@@ -4,8 +4,11 @@
 # Please consider reviewing the plugin on spigot :)
 
 #config version, DO NOT CHANGE THIS!
-version: 0
+version: 1
 
 # Cool down between auto totem uses. (In Seconds)
 # this can be overwritten by giving players the autototem.bypass permission
 cooldown: 0
+
+# Should vanilla totem use (Using a totem of undying normally by holding it in your hand) be effected by cooldowns?
+includeVanillaTotemsInCooldown: true

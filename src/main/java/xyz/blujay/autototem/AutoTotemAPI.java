@@ -13,11 +13,13 @@ import java.util.UUID;
 public class AutoTotemAPI {
 
     private int coolDown;
+    public boolean includeVanillaTotemsInCooldown;
     private Map<UUID, Instant> coolDowns = new HashMap<>();
 
 
-    AutoTotemAPI(int coolDown){
+    AutoTotemAPI(int coolDown, boolean includeVanillaTotemsInCooldown){
         this.coolDown = coolDown;
+        this.includeVanillaTotemsInCooldown = includeVanillaTotemsInCooldown;
     }
 
     //@return True if the player will use a totem when they die

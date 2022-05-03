@@ -18,7 +18,7 @@ public final class AutoTotem extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        api = new AutoTotemAPI(getConfig().getInt("cooldown"));
+        api = new AutoTotemAPI(getConfig().getInt("cooldown"), getConfig().getBoolean("includeVanillaTotemsInCooldown"));
 
         int pluginId = 14038;
         Metrics metrics = new Metrics(this, pluginId);

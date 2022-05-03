@@ -43,12 +43,14 @@ public class PlayerKilledEvent implements Listener {
                 }
             }
             else{
-                //cancel event if player is on cool down.
-                if(!api.canUseTotem(p)){
-                    e.setCancelled(true);
-                }
-                else{
-                    api.setCoolDown(p);
+                //cancel event if player is on cool down. (only if we include vanilla totems)
+                if(api.includeVanillaTotemsInCooldown){
+                    if(!api.canUseTotem(p)){
+                        e.setCancelled(true);
+                    }
+                    else{
+                        api.setCoolDown(p);
+                    }
                 }
             }
         }
