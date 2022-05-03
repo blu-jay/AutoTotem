@@ -1,6 +1,5 @@
 package xyz.blujay.autototem;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -12,9 +11,9 @@ import java.util.UUID;
 
 public class AutoTotemAPI {
 
-    private int coolDown;
-    public boolean includeVanillaTotemsInCooldown;
-    private Map<UUID, Instant> coolDowns = new HashMap<>();
+    private final int coolDown;
+    public final boolean includeVanillaTotemsInCooldown;
+    private final Map<UUID, Instant> coolDowns = new HashMap<>();
 
 
     AutoTotemAPI(int coolDown, boolean includeVanillaTotemsInCooldown){
@@ -24,12 +23,7 @@ public class AutoTotemAPI {
 
     //@return True if the player will use a totem when they die
     public boolean canUseTotem(Player player){
-        if(player.getInventory().containsAtLeast(new ItemStack(Material.TOTEM_OF_UNDYING), 1) && player.hasPermission("autototem.use") && getCoolDown(player).isBefore(Instant.now())){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return player.getInventory().containsAtLeast(new ItemStack(Material.TOTEM_OF_UNDYING), 1) && player.hasPermission("autototem.use") && getCoolDown(player).isBefore(Instant.now());
     }
 
     //@return the instant when the player's cool down expires, and they can use a totem again.
