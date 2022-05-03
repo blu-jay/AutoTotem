@@ -11,4 +11,4 @@ version: 1
 cooldown: 0
 
 # Should vanilla totem use (Using a totem of undying normally by holding it in your hand) be effected by cooldowns?
-includeVanillaTotemsInCooldown: true
+includeVanillaTotemsInCooldown: false
