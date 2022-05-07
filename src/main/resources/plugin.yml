@@ -11,6 +11,10 @@ commands:
     description: Displays the credits for the plugin.
     usage: /<command>
     permission: autototem.credits
+  reload:
+    description: Reload the config file for AutoTotem
+    usage: /<command>
+    permission: autototem.reload
 permissions:
   autototem.*:
     description: Have access to all permissions of AutoTotem
@@ -24,3 +28,6 @@ permissions:
   autototem.bypass:
     description: Permission to bypass the cooldown set in config.yml
     default: false
+  autototem.reload:
+    description: Permission to reload the config file for AutoTotem
+    default: op
