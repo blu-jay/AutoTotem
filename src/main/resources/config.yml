@@ -13,5 +13,5 @@ cooldown: 0
 # Should vanilla totem use (Using a totem of undying normally by holding it in your hand) be effected by cooldowns?
 includeVanillaTotemsInCooldown: false
 
-# Should AutoTotem only use totems from the Action Bar?
-actionBarOnly: false
+# Should AutoTotem only use totems from the hot bar?
+hotBarOnly: false

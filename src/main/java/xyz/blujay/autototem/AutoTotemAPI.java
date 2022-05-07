@@ -15,7 +15,7 @@ public class AutoTotemAPI {
     private int coolDown;
     public boolean includeVanillaTotemsInCooldown;
     private Map<UUID, Instant> coolDowns;
-    public boolean actionBarOnly;
+    public boolean hotBarOnly;
 
 
     AutoTotemAPI(FileConfiguration config){
@@ -25,7 +25,7 @@ public class AutoTotemAPI {
     public void setConfigOptions(FileConfiguration config){
         this.coolDown = config.getInt("cooldown");
         this.includeVanillaTotemsInCooldown = config.getBoolean("includeVanillaTotemsInCooldown");
-        this.actionBarOnly = config.getBoolean("actionBarOnly");
+        this.hotBarOnly = config.getBoolean("hotBarOnly");
         this.coolDowns = new HashMap<>();
     }
 
@@ -36,7 +36,7 @@ public class AutoTotemAPI {
         var playerInv = player.getInventory();
         boolean playerHasTotem;
 
-        if(actionBarOnly){
+        if(hotBarOnly){
             var offHand = playerInv.getItemInOffHand();
             var hotBar1 = playerInv.getItem(0);
             var hotBar2 = playerInv.getItem(1);
