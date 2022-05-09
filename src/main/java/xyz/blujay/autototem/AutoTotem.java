@@ -9,20 +9,16 @@ import xyz.blujay.autototem.utilities.Metrics;
 
 public final class AutoTotem extends JavaPlugin {
 
-    private static AutoTotem plugin;
     private static AutoTotemAPI api;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        plugin = this;
-
-        getConfig().options().copyDefaults();
         saveDefaultConfig();
 
         api = new AutoTotemAPI(getConfig());
 
-        int pluginId = 14038;
+        int pluginId = 14_038;
         new Metrics(this, pluginId);
 
         PluginCommand autoTotemCommand = getCommand("AutoTotem");
@@ -38,7 +34,7 @@ public final class AutoTotem extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);
-        this.getLogger().info("AutoTotem has started!");
+        getLogger().info("AutoTotem has started!");
     }
 
     public void reload(){
@@ -46,8 +42,8 @@ public final class AutoTotem extends JavaPlugin {
         api.setConfigOptions(getConfig());
     }
 
-    public static AutoTotem getPlugin() {
-        return plugin;
+    public static AutoTotem getInstance() {
+        return JavaPlugin.getPlugin(AutoTotem.class);
     }
 
     public AutoTotemAPI getAPI(){

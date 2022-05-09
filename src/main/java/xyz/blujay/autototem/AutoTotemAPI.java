@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class AutoTotemAPI {
+public final class AutoTotemAPI {
 
     private int coolDown;
     public boolean includeVanillaTotemsInCooldown;
@@ -18,11 +18,11 @@ public class AutoTotemAPI {
     public boolean hotBarOnly;
 
 
-    AutoTotemAPI(FileConfiguration config){
+    AutoTotemAPI(final FileConfiguration config){
         setConfigOptions(config);
     }
 
-    public void setConfigOptions(FileConfiguration config){
+    public void setConfigOptions(final FileConfiguration config){
         this.coolDown = config.getInt("cooldown");
         this.includeVanillaTotemsInCooldown = config.getBoolean("includeVanillaTotemsInCooldown");
         this.hotBarOnly = config.getBoolean("hotBarOnly");
@@ -30,23 +30,23 @@ public class AutoTotemAPI {
     }
 
     //@return True if the player will use a totem when they die
-    public boolean canUseTotem(Player player){
+    public boolean canUseTotem(final Player player){
 
-        var totem = new ItemStack(Material.TOTEM_OF_UNDYING);
-        var playerInv = player.getInventory();
-        boolean playerHasTotem;
+        final var totem = new ItemStack(Material.TOTEM_OF_UNDYING);
+        final var playerInv = player.getInventory();
+        final boolean playerHasTotem;
 
         if(hotBarOnly){
-            var offHand = playerInv.getItemInOffHand();
-            var hotBar1 = playerInv.getItem(0);
-            var hotBar2 = playerInv.getItem(1);
-            var hotBar3 = playerInv.getItem(2);
-            var hotBar4 = playerInv.getItem(3);
-            var hotBar5 = playerInv.getItem(4);
-            var hotBar6 = playerInv.getItem(5);
-            var hotBar7 = playerInv.getItem(6);
-            var hotBar8 = playerInv.getItem(7);
-            var hotBar9 = playerInv.getItem(8);
+            final var offHand = playerInv.getItemInOffHand();
+            final var hotBar1 = playerInv.getItem(0);
+            final var hotBar2 = playerInv.getItem(1);
+            final var hotBar3 = playerInv.getItem(2);
+            final var hotBar4 = playerInv.getItem(3);
+            final var hotBar5 = playerInv.getItem(4);
+            final var hotBar6 = playerInv.getItem(5);
+            final var hotBar7 = playerInv.getItem(6);
+            final var hotBar8 = playerInv.getItem(7);
+            final var hotBar9 = playerInv.getItem(8);
 
             playerHasTotem = ((offHand.isSimilar(totem)) ||
                     (hotBar1 != null && hotBar1.isSimilar(totem)) ||
@@ -67,7 +67,7 @@ public class AutoTotemAPI {
     }
 
     //@return the instant when the player's cool down expires, and they can use a totem again.
-    public Instant getCoolDown(Player player){
+    public Instant getCoolDown(final Player player){
         if(player.hasPermission("autototem.bypass")){
             return Instant.EPOCH;
         }
@@ -76,12 +76,12 @@ public class AutoTotemAPI {
     }
 
     //Set a player's totem cool down X seconds into the future.
-    public void setCoolDown(Player player, int coolDown){
+    public void setCoolDown(final Player player, final int coolDown){
         coolDowns.put(player.getUniqueId(), Instant.now().plusSeconds(coolDown));
     }
 
     //Set a player's totem cool down to the default number of seconds into the future.
-    public void setCoolDown(Player player){
+    public void setCoolDown(final Player player){
         setCoolDown(player, this.coolDown);
     }
 }
