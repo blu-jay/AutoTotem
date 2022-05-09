@@ -18,7 +18,7 @@ public final class AutoTotem extends JavaPlugin {
 
         api = new AutoTotemAPI(getConfig());
 
-        int pluginId = 14_038;
+        int pluginId = 14038;
         new Metrics(this, pluginId);
 
         PluginCommand autoTotemCommand = getCommand("AutoTotem");
@@ -34,7 +34,7 @@ public final class AutoTotem extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);
-        getLogger().info("AutoTotem has started!");
+        this.getLogger().info("AutoTotem has started!");
     }
 
     public void reload(){
@@ -43,7 +43,7 @@ public final class AutoTotem extends JavaPlugin {
     }
 
     public static AutoTotem getInstance() {
-        return JavaPlugin.getPlugin(AutoTotem.class);
+        return getPlugin(AutoTotem.class);
     }
 
     public AutoTotemAPI getAPI(){

@@ -10,17 +10,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 import xyz.blujay.autototem.AutoTotem;
 
-public final class PlayerKilledEvent implements Listener {
+public class PlayerKilledEvent implements Listener {
 
     @EventHandler
-    public void onPlayerDeath(final EntityResurrectEvent e){
+    public void onPlayerDeath(EntityResurrectEvent e){
         if(e.getEntity() instanceof Player p){
 
-            final var plugin = AutoTotem.getInstance();
-            final var api = plugin.getAPI();
+            var plugin = AutoTotem.getInstance();
+            var api = plugin.getAPI();
 
             if(e.isCancelled()){
-                final var inv = p.getInventory();
+                var inv = p.getInventory();
 
                 if(api.canUseTotem(p)){
                     api.setCoolDown(p);
@@ -28,7 +28,7 @@ public final class PlayerKilledEvent implements Listener {
                     e.setCancelled(false);
 
                     //Create copy of item in off hand.
-                    final var handItem = inv.getItemInOffHand().clone();
+                    var handItem = inv.getItemInOffHand().clone();
                     //Put Totem in off hand.
                     inv.setItemInOffHand(new ItemStack(Material.TOTEM_OF_UNDYING));
 
