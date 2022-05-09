@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public final class AutoTotemAPI {
+public class AutoTotemAPI {
 
     private int coolDown;
     public boolean includeVanillaTotemsInCooldown;

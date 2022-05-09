@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import xyz.blujay.autototem.AutoTotem;
 
-public final class ReloadCommand implements CommandExecutor {
+public class ReloadCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
