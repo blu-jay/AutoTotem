@@ -16,7 +16,7 @@ public class PlayerKilledEvent implements Listener {
     public void onPlayerDeath(EntityResurrectEvent e){
         if(e.getEntity() instanceof Player p){
 
-            var plugin = AutoTotem.getPlugin();
+            var plugin = AutoTotem.getInstance();
             var api = plugin.getAPI();
 
             if(e.isCancelled()){
