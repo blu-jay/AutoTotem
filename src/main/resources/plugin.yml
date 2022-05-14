@@ -31,3 +31,5 @@ permissions:
   autototem.reload:
     description: Permission to reload the config file for AutoTotem
     default: op
+loadbefore:
+  - ExecutableItems

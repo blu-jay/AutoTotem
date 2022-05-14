@@ -4,10 +4,10 @@
 # Please consider reviewing the plugin on spigot :)
 
 #config version, DO NOT CHANGE THIS!
-version: 2
+version: 3
 
-# Cool down between auto totem uses. (In Seconds)
-# this can be overwritten by giving players the autototem.bypass permission
+# Cooldown between auto totem uses. (In Seconds) Set to 0 for no cooldown.
+# this can be overridden by giving players the autototem.bypass permission
 cooldown: 0
 
 # Should vanilla totem use (Using a totem of undying normally by holding it in your hand) be effected by cooldowns?
@@ -15,3 +15,23 @@ includeVanillaTotemsInCooldown: false
 
 # Should AutoTotem only use totems from the hot bar?
 hotBarOnly: false
+
+# Should dying reset the cooldown?
+resetCooldownOnDeath: true
+
+
+# // MESSAGES \\
+# Note: You can use HEX color codes, just make sure they follow the following format -> &#FFFFFF Example: &#9232A3
+prefix: '&#9232A3[&#3FAFFFAutoTotem&#9232A3]&#3FAFFF '
+
+# Should AutoTotem send a message at the start of a cooldown? (Cooldown placeholder = [TIME] )
+sendCooldownStartMessage: true
+cooldownStartMessage: "Totem activated! &#9232A3Cooldown will end in [TIME] seconds."
+
+# Should AutoTotem send a message at the end of a cooldown?
+sendCooldownEndMessage: true
+cooldownEndMessage: "You are no longer on cooldown."
+
+# Should AutoTotem send a message when cooldown is reset by dying?
+sendResetOnDeathMessage: true
+resetOnDeathMessage: "You are no longer on cooldown."

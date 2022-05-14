@@ -11,8 +11,9 @@ public class ReloadCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        AutoTotem.getInstance().reload();
-        sender.sendMessage(ChatColor.BLUE + "AutoTotem config.yml has been reloaded.");
+        var plugin = AutoTotem.getInstance();
+        plugin.reload();
+        sender.sendMessage(plugin.getAPI().prefix + "config.yml has been reloaded.");
         return true;
     }
 }

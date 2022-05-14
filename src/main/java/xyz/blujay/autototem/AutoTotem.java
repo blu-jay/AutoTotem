@@ -4,7 +4,9 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.blujay.autototem.commands.AutoTotemCommand;
 import xyz.blujay.autototem.commands.ReloadCommand;
-import xyz.blujay.autototem.events.PlayerKilledEvent;
+import xyz.blujay.autototem.events.PlayerDamagedEvent;
+import xyz.blujay.autototem.events.PlayerDeathEvent;
+import xyz.blujay.autototem.events.PlayerResurrectionEvent;
 import xyz.blujay.autototem.utilities.Metrics;
 
 public final class AutoTotem extends JavaPlugin {
@@ -33,7 +35,11 @@ public final class AutoTotem extends JavaPlugin {
             getPluginLoader().disablePlugin(this);
         }
 
-        getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);
+        var pluginManager = getServer().getPluginManager();
+        pluginManager.registerEvents(new PlayerResurrectionEvent(), this);
+        pluginManager.registerEvents(new PlayerDamagedEvent(), this);
+        pluginManager.registerEvents(new PlayerDeathEvent(), this);
+
         this.getLogger().info("AutoTotem has started!");
     }
 
