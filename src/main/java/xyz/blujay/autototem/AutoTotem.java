@@ -40,7 +40,7 @@ public final class AutoTotem extends JavaPlugin {
         pluginManager.registerEvents(new PlayerDamagedEvent(), this);
         pluginManager.registerEvents(new PlayerDeathEvent(), this);
 
-        this.getLogger().info("AutoTotem has started!");
+        getLogger().info("AutoTotem has started!");
     }
 
     public void reload(){

@@ -13,7 +13,7 @@ public class PlayerDamagedEvent implements Listener {
 
     @EventHandler
     public void onPlayerDamaged(EntityDamageEvent e) {
-        if(e.getEntity() instanceof Player p){
+        if(e.getEntity() instanceof Player p && !e.isCancelled()){
             //If player received lethal damage
             if(e.getFinalDamage() >= p.getHealth()){
                 //Check if player has a totem in their inv
