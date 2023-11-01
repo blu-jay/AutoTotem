@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -11,9 +12,9 @@ import xyz.blujay.autototem.AutoTotem;
 
 public class PlayerDamagedEvent implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDamaged(EntityDamageEvent e) {
-        if(e.getEntity() instanceof Player p && !e.isCancelled()){
+        if(e.getEntity() instanceof Player p){
             //If player received lethal damage
             if(e.getFinalDamage() >= p.getHealth()){
                 //Check if player has a totem in their inv
