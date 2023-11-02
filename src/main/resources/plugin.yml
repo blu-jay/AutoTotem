@@ -1,7 +1,7 @@
 name: AutoTotem
 version: '${project.version}'
 main: xyz.blujay.autototem.AutoTotem
-api-version: 1.16.5
+api-version: 1.16
 prefix: AutoTotem
 authors: [ blujay ]
 description: Automatically use a totem of undying from your inventory!
