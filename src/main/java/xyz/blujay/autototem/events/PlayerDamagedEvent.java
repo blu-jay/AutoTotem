@@ -17,6 +17,9 @@ public class PlayerDamagedEvent implements Listener {
         if(e.getEntity() instanceof Player p){
             //If player received lethal damage
             if(e.getFinalDamage() >= p.getHealth()){
+                // Ignore void damage
+                if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID)) return;
+
                 //Check if player has a totem in their inv
                 var inv = p.getInventory();
                 var firstTotemSlot = inv.first(Material.TOTEM_OF_UNDYING);
